@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "minecraft:totem_of_undying"
+    },
+    {
+      "item": "heartstone:heartstone"
+    },
+    {
+      "item": "heartstone:heartstone"
+    }
+  ],
+  "result": {
+    "count": 2,
+    "item": "connection:amulet_of_connection"
+  }
+}

@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "connection:item/amulet_of_connection_0"
+  }
+}

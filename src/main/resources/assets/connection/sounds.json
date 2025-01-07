@@ -1,0 +1,22 @@
+{
+  "pearl_inserted": {
+    "sounds": [
+      {
+        "name": "mob/endermen/portal2",
+        "volume": 0.2,
+        "pitch": 1.75
+      }
+    ],
+    "subtitle": "subtitles.item.amulet_of_connection.pearl_inserted"
+  },
+  "pearl_removed": {
+    "sounds": [
+      {
+        "name": "mob/endermen/portal",
+        "volume": 0.2,
+        "pitch": 1.75
+      }
+    ],
+    "subtitle": "subtitles.item.amulet_of_connection.pearl_removed"
+  }
+}
