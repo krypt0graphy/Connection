@@ -1,8 +1,6 @@
 package com.kryptography.connection.common.item;
 
 
-
-import com.kryptography.connection.Connection;
 import com.kryptography.connection.init.ModItems;
 import com.kryptography.connection.init.ModSounds;
 import net.mehvahdjukaar.heartstone.HeartstoneData;
@@ -29,8 +27,7 @@ import net.minecraft.world.inventory.ClickAction;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.*;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.LevelAccessor;
-import org.apache.logging.log4j.message.Message;
+import net.minecraft.world.level.entity.EntityTickList;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Iterator;
@@ -97,11 +94,11 @@ public class AmuletItem extends Item {
                         teleported = true;
                     } else if (getCurrentAmount(itemstack) < 1 && !teleported) {
                         player.displayClientMessage(Component.translatable("message.amulet.nopearls").withStyle(ChatFormatting.RED), true);
-                        pLevel.playSound(null, player, SoundEvents.ENDER_EYE_DEATH, player.getSoundSource(), 0.6F, 0.5F);
+                        pLevel.playSound(null, player, ModSounds.PLAYER_OR_PEARL_MISSING.get(), player.getSoundSource(), 0.6F, 0.5F);
                     }
                 } else {
                     player.displayClientMessage(Component.translatable("message.amulet.noplayer").withStyle(ChatFormatting.RED), true);
-                    pLevel.playSound((Player) null, player, SoundEvents.ENDER_EYE_DEATH, player.getSoundSource(), 0.6F, 0.5F);
+                    pLevel.playSound((Player) null, player, ModSounds.PLAYER_OR_PEARL_MISSING.get(), player.getSoundSource(), 0.6F, 0.5F);
                 }
                 updateTexture(itemstack);
                 player.getCooldowns().addCooldown(this, 60);
@@ -113,25 +110,24 @@ public class AmuletItem extends Item {
         Level level = player.level();
         RandomSource random = level.random;
 
-        double randomX = player.getX() + random.nextIntBetweenInclusive(1, 8);
-        double randomZ = player.getZ() + random.nextIntBetweenInclusive(1, 8);
+        double randomX = player.getX() + random.nextIntBetweenInclusive(-8, 8);
+        double randomZ = player.getZ() + random.nextIntBetweenInclusive(-8, 8);
 
         BlockPos pos = new BlockPos((int)randomX, (int)player.getY(), (int)player.getZ());
 
-        if(!level.getBlockState(pos).isSuffocating(level, pos) && (level.getBlockState(pos.below()).isSolid() || level.getBlockState(pos.below(2)).isSolid())) {
+        if (!level.getBlockState(pos).isSuffocating(level, pos) && !level.getBlockState(pos.above(1)).isSuffocating(level, pos.above(1)) && (level.getBlockState(pos.below()).isSolid() || level.getBlockState(pos.below(2)).isSolid())) {
             return pos;
         } else {
-            boolean found = false;
-            if(!found) {
-                for(int i = -32; i < 32; i++) {
+            for (int i = -8; i < 8; i++) {
                 BlockPos newPos = new BlockPos((int) randomX, (int) (player.getY() + i), (int) randomZ);
-                    if(!level.getBlockState(newPos).isSuffocating(level, newPos) && (level.getBlockState(newPos.below()).isSolid() || level.getBlockState(newPos.below(2)).isSolid())) {
+                boolean found = false;
+                if (!found) {
+                    if (!level.getBlockState(newPos).isSuffocating(level, newPos) && !level.getBlockState(newPos.above(1)).isSuffocating(level, newPos.above(1)) && (level.getBlockState(newPos.below()).isSolid() || level.getBlockState(newPos.below(2)).isSolid())) {
                         found = true;
                         return newPos;
                     }
                 }
             }
-
         }
         return new BlockPos((int) player.getX(), (int) player.getY(), (int) player.getZ());
     }

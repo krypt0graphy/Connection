@@ -15,4 +15,5 @@ public class ModSounds {
 
     public static final RegistryObject<SoundEvent> PEARL_INSERTED = SOUND_EVENTS.register("pearl_inserted", () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(Connection.MOD_ID, "pearl_inserted")));
     public static final RegistryObject<SoundEvent> PEARL_REMOVED = SOUND_EVENTS.register("pearl_removed", () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(Connection.MOD_ID, "pearl_removed")));
+    public static final RegistryObject<SoundEvent> PLAYER_OR_PEARL_MISSING = SOUND_EVENTS.register("player_or_pearl_missing", () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(Connection.MOD_ID, "player_or_pearl_missing")));
 }
