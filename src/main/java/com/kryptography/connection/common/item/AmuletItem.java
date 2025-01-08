@@ -2,6 +2,7 @@ package com.kryptography.connection.common.item;
 
 
 
+import com.kryptography.connection.Connection;
 import com.kryptography.connection.init.ModItems;
 import com.kryptography.connection.init.ModSounds;
 import net.mehvahdjukaar.heartstone.HeartstoneData;
@@ -29,6 +30,7 @@ import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.*;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
+import org.apache.logging.log4j.message.Message;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Iterator;
@@ -111,19 +113,19 @@ public class AmuletItem extends Item {
         Level level = player.level();
         RandomSource random = level.random;
 
-        double randomX = player.getX() + random.nextIntBetweenInclusive(0, 3);
-        double randomZ = player.getZ() + random.nextIntBetweenInclusive(0, 3);
+        double randomX = player.getX() + random.nextIntBetweenInclusive(1, 8);
+        double randomZ = player.getZ() + random.nextIntBetweenInclusive(1, 8);
 
         BlockPos pos = new BlockPos((int)randomX, (int)player.getY(), (int)player.getZ());
 
-        if(level.getBlockState(pos).isAir() && (!level.getBlockState(pos.below()).isAir() || !level.getBlockState(pos.below(2)).isAir())) {
+        if(!level.getBlockState(pos).isSuffocating(level, pos) && (level.getBlockState(pos.below()).isSolid() || level.getBlockState(pos.below(2)).isSolid())) {
             return pos;
         } else {
             boolean found = false;
             if(!found) {
-                for(int i = -30; i < 30; i++) {
+                for(int i = -32; i < 32; i++) {
                 BlockPos newPos = new BlockPos((int) randomX, (int) (player.getY() + i), (int) randomZ);
-                    if(level.getBlockState(newPos).isAir() && (!level.getBlockState(newPos.below()).isAir() || !level.getBlockState(newPos.below(2)).isAir())) {
+                    if(!level.getBlockState(newPos).isSuffocating(level, newPos) && (level.getBlockState(newPos.below()).isSolid() || level.getBlockState(newPos.below(2)).isSolid())) {
                         found = true;
                         return newPos;
                     }
@@ -248,29 +250,16 @@ public class AmuletItem extends Item {
 
                     insert.shrink(canAdd);
                 }
-
-
             } else {
-                if(getCurrentAmount(totemStack) + insertCopy.getCount() <= MAX_PEARLS) {
                     ItemStack itemStack = insert.copy();
                     CompoundTag newTag = new CompoundTag();
                     itemStack.save(newTag);
                     listTag.add(newTag);
                     insert.shrink(insertCopy.getCount());
-                }
-
-                if(getCurrentAmount(totemStack) + insertCopy.getCount() > MAX_PEARLS) {
-                    int canAdd = MAX_PEARLS - getCurrentAmount(totemStack);
-
-                    ItemStack itemStack = insert.copyWithCount(canAdd);
-                    CompoundTag newTag = new CompoundTag();
-                    itemStack.save(newTag);
-                    listTag.add(newTag);
-                    insert.shrink(canAdd);
-                }
             }
         }
     }
+
 
     public static Optional<ItemStack> removeOne(ItemStack totemStack) {
         CompoundTag tag = totemStack.getOrCreateTag();
@@ -281,15 +270,15 @@ public class AmuletItem extends Item {
         ListTag listTag = tag.getList("Pearls", 10);
         if (listTag.isEmpty()) {
             return Optional.empty();
+        } else {
+            CompoundTag compoundTag = listTag.getCompound(0);
+            ItemStack itemStack = ItemStack.of(compoundTag);
+            listTag.remove(0);
+            if(listTag.isEmpty()) {
+                tag.remove("Pearls");
+            }
+            return Optional.of(itemStack);
         }
-
-        CompoundTag compoundTag = listTag.getCompound(0);
-        ItemStack itemStack = ItemStack.of(compoundTag);
-        listTag.remove(0);
-        if(listTag.isEmpty()) {
-            tag.remove("Pearls");
-        }
-        return Optional.of(itemStack);
     }
 
     @Override
@@ -371,15 +360,10 @@ public class AmuletItem extends Item {
 
     public static Optional<CompoundTag> getMatchingItem(ItemStack pStack, ListTag pList) {
         return pList.stream().filter(CompoundTag.class::isInstance).map(CompoundTag.class::cast).filter((p_186350_) -> {
-            return ItemStack.isSameItemSameTags(ItemStack.of(p_186350_), pStack);
-        }).findFirst();
-    }
-
-    public static Optional<CompoundTag> getMatchingItemNoNbt(ItemStack pStack, ListTag pList) {
-        return pList.stream().filter(CompoundTag.class::isInstance).map(CompoundTag.class::cast).filter((p_186350_) -> {
             return ItemStack.isSameItem(ItemStack.of(p_186350_), pStack);
         }).findFirst();
     }
+
 
     public static Stream<ItemStack> getContent(ItemStack totemStack) {
         CompoundTag tag = totemStack.getOrCreateTag();
@@ -397,7 +381,7 @@ public class AmuletItem extends Item {
             return;
         } else {
             ListTag listtag = tag.getList("Pearls", 10);
-            Optional<CompoundTag> matchingItem = getMatchingItemNoNbt(new ItemStack(Items.ENDER_PEARL), listtag);
+            Optional<CompoundTag> matchingItem = getMatchingItem(new ItemStack(Items.ENDER_PEARL), listtag);
             if(matchingItem.isPresent()) {
                 CompoundTag matchingItemTag = matchingItem.get();
                 ItemStack matchingStack = ItemStack.of(matchingItemTag);
