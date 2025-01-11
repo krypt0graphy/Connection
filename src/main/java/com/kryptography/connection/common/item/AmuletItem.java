@@ -220,10 +220,11 @@ public class AmuletItem extends Item {
             ListTag listTag = tag.getList("Pearls", 10);
             ItemStack insertCopy = insert.copyWithCount(insert.getCount());
             Optional<CompoundTag> matchingStackTag = getMatchingItem(insertCopy, listTag);
+            int currentAmount = getCurrentAmount(totemStack);
 
 
             if (matchingStackTag.isPresent()) {
-                if(getCurrentAmount(totemStack) + insertCopy.getCount() <= MAX_PEARLS) {
+                if(currentAmount + insertCopy.getCount() <= MAX_PEARLS) {
                     CompoundTag matching = matchingStackTag.get();
                     ItemStack matchingStack = ItemStack.of(matching);
 
@@ -232,9 +233,8 @@ public class AmuletItem extends Item {
                     listTag.remove(matching);
                     listTag.add(matching);
 
-                    insert.shrink(insertCopy.getCount());
-                }
-                if (getCurrentAmount(totemStack) + insertCopy.getCount() > MAX_PEARLS) {
+                    insert.shrink(insert.getCount());
+                } else if (currentAmount + insertCopy.getCount() > MAX_PEARLS) {
                     int canAdd = MAX_PEARLS - getCurrentAmount(totemStack);
                     CompoundTag matching = matchingStackTag.get();
                     ItemStack matchingStack = ItemStack.of(matching);
