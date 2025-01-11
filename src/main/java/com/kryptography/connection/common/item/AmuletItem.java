@@ -27,7 +27,6 @@ import net.minecraft.world.inventory.ClickAction;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.*;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.entity.EntityTickList;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Iterator;
