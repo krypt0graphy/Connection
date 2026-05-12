@@ -5,9 +5,7 @@
       "conditions": {
         "items": [
           {
-            "items": [
-              "heartstone:heartstone"
-            ]
+            "items": "heartstone:heartstone"
           }
         ]
       },
@@ -22,14 +20,13 @@
   },
   "requirements": [
     [
-      "has_heartstone",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_heartstone"
     ]
   ],
   "rewards": {
     "recipes": [
       "minecraft:amulet_of_connection_duplicate"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }
