@@ -1,0 +1,8 @@
+{
+  "item.connection.amulet_of_connection": "تميمة الاتصال",
+  "tooltip.amulet.id": "Id: %s",
+  "tooltip.amulet.itemcount": "لآلئ الاندر: %s/%s",
+  "tooltip.amulet.guide": "استخدمها للانتقال إلى اللاعب الآخر",
+  "message.amulet.nopearls": "لا توجد لآلئ اندر...",
+  "message.amulet.noplayer": "لم يتم العثور على لاعب..."
+}

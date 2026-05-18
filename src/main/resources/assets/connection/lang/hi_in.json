@@ -1,0 +1,8 @@
+{
+  "item.connection.amulet_of_connection": "जुड़ाव का ताबीज",
+  "tooltip.amulet.id": "Id: %s",
+  "tooltip.amulet.itemcount": "एन्डर मोती: %s/%s",
+  "tooltip.amulet.guide": "दूसरे खिलाड़ी के पास टेलीपोर्ट करने के लिए उपयोग करें",
+  "message.amulet.nopearls": "एन्डर मोती नहीं हैं...",
+  "message.amulet.noplayer": "कोई खिलाड़ी नहीं मिला..."
+}

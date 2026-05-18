@@ -1,0 +1,8 @@
+{
+  "item.connection.amulet_of_connection": "Amulett der Verbindung",
+  "tooltip.amulet.id": "Id: %s",
+  "tooltip.amulet.itemcount": "Enderperlen: %s/%s",
+  "tooltip.amulet.guide": "Benutzen, um zum anderen Spieler zu teleportieren",
+  "message.amulet.nopearls": "Keine Enderperlen...",
+  "message.amulet.noplayer": "Kein Spieler gefunden..."
+}

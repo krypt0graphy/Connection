@@ -1,0 +1,8 @@
+{
+  "item.connection.amulet_of_connection": "Амулет связи",
+  "tooltip.amulet.id": "Id: %s",
+  "tooltip.amulet.itemcount": "Эндер-жемчуг: %s/%s",
+  "tooltip.amulet.guide": "Используйте, чтобы телепортироваться к другому игроку",
+  "message.amulet.nopearls": "Нет эндер-жемчуга...",
+  "message.amulet.noplayer": "Игрок не обнаружен..."
+}
