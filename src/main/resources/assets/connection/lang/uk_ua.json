@@ -1,0 +1,8 @@
+{
+  "item.connection.amulet_of_connection": "Амулет зв'язку",
+  "tooltip.amulet.id": "Id: %s",
+  "tooltip.amulet.itemcount": "Перлини Енду: %s/%s",
+  "tooltip.amulet.guide": "Використовуйте, щоб телепортуватися до іншого гравця",
+  "message.amulet.nopearls": "Немає перлин Енду...",
+  "message.amulet.noplayer": "Жодного гравця не знайдено..."
+}

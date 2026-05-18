@@ -1,0 +1,8 @@
+{
+  "item.connection.amulet_of_connection": "羈絆護身符",
+  "tooltip.amulet.id": "Id：%s",
+  "tooltip.amulet.itemcount": "終界珍珠：%s/%s",
+  "tooltip.amulet.guide": "使用以傳送至另一玩家",
+  "message.amulet.nopearls": "沒有終界珍珠……",
+  "message.amulet.noplayer": "未找到任何玩家……"
+}

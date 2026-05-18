@@ -1,0 +1,8 @@
+{
+  "item.connection.amulet_of_connection": "つながりのアミュレット",
+  "tooltip.amulet.id": "Id: %s",
+  "tooltip.amulet.itemcount": "エンダーパール: %s/%s",
+  "tooltip.amulet.guide": "使用すると相手のプレイヤーにテレポートする",
+  "message.amulet.nopearls": "エンダーパールがありません...",
+  "message.amulet.noplayer": "プレイヤーが見つかりませんでした..."
+}

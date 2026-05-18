@@ -1,0 +1,8 @@
+{
+  "item.connection.amulet_of_connection": "இணைப்பின் தாயத்து",
+  "tooltip.amulet.id": "Id: %s",
+  "tooltip.amulet.itemcount": "எண்டர் முத்துக்கள்: %s/%s",
+  "tooltip.amulet.guide": "மற்ற வீரருக்கு டெலிபோர்ட் செய்ய பயன்படுத்தவும்",
+  "message.amulet.nopearls": "எண்டர் முத்துக்கள் இல்லை...",
+  "message.amulet.noplayer": "எந்த வீரரும் இல்லை..."
+}
